@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包</title>
+</head>
+
+<body>
+    <input type="text" id="input">
+    <script>
+        //闭包防抖
+        function responTimer() {
+            //创建计时器
+            var timer
+            function createTimer(value) {
+                clearTimeout(timer)
+                timer = setTimeout(function () {
+                    console.log(value)
+                }, 1000)
+            }
+            return createTimer
+        }
+        var fn = responTimer()
+        document.getElementById("input").addEventListener("keyup", function (e) {
+            fn(e.target.value)
+        })
+    </script>
+</body>
+
+</html>
