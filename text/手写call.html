@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //实际开发中用过call  apply的场景
+        //改变this的指向  参数的区别
+        //js的继承  原型链继承  构造函数的继承  call实现
+        //实现手写call
+
+        var person = {
+            getName: function (value) {
+                return this.name + value
+            }
+        }
+
+        var person1 = {
+            name: '科比'
+        }
+
+        //手写call的第一个问题
+        Function.prototype.mycall = function (context) {
+
+            //这里面的this是谁？//person.getName
+            //这里面的this必须要是一个function
+
+            if (typeof this !== 'function') {
+                throw new Error('这不是一个函数')
+            }
+
+            context = context || window
+
+            //考虑参数
+            //拿到除了第一个参数之外的参数
+            var args = [...arguments].slice(1)
+            console.log(args)
+
+            //要在person1 上面假设有一个方法
+            context.fn = this
+            var result = context.fn(...args)
+            return result
+
+        }
+
+        console.log(person.getName.mycall(person1, '扣篮'))
+    </script>
+</body>
+
+</html>
