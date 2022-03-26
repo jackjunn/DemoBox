@@ -5,27 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>闭包</title>
+    <title>防抖</title>
 </head>
 
 <body>
     <input type="text" id="input">
     <script>
-        //闭包防抖
+        //闭包防抖，什么是防抖：持续触发过程中不执行函数操作；停止触发，等到指定时间后执行一次函数操作
+
         function responTimer() {
             //创建计时器
             var timer
-            function createTimer(value) {
+            function createTimer(value, wait) {
                 clearTimeout(timer)
                 timer = setTimeout(function () {
                     console.log(value)
-                }, 1000)
+                }, wait)
             }
             return createTimer
         }
+
         var fn = responTimer()
+
         document.getElementById("input").addEventListener("keyup", function (e) {
-            fn(e.target.value)
+            fn(e.target.value, 1000)
         })
     </script>
 </body>

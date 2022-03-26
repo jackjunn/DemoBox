@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+</head>
+
+<body>
+    <button id="btn">节流</button>
+    <script>
+        //闭包节流，什么是节流：持续触发过程中，每隔指定时间才执行一次函数操作
+
+        function fn(value) {
+            console.log(value)
+        }
+
+        function throttle() {
+            let timer
+            return function (value, wait) {
+                if (!timer) {
+                    timer = setTimeout(function () {
+                        fn(value)
+                        timer = null
+                    }, wait)
+                }
+            }
+        }
+
+        var responTimer = throttle()
+
+        document.getElementById("btn").addEventListener("click", function () {
+            responTimer("鸡柳", 2000)
+        })
+    </script>
+</body>
+
+</html>
