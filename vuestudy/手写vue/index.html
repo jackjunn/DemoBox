@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{str}}</h1>
+        {{str}}
+        <hr>
+        <span>{{num}}</span>
+        <br>
+        <hr>
+        <button @click="btn">按钮</button>
+        <hr>
+        <input type="text" v-model="str">
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                str: 'hello world',
+                num: 1
+            },
+            beforeCreate () {
+                console.log('beforeCreate', this.$data, this.$el)
+            },
+            Create () {
+                console.log('Create', this.$data, this.$el)
+            },
+            beforeMount () {
+                console.log('beforeMount', this.$data, this.$el)
+            },
+            Mounted () {
+                console.log('Mounted', this.$data, this.$el)
+            },
+            methods: {
+                btn () {
+                    this.str = '不好了'
+                    console.log(this.str)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
